@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 namespace Timesheet
 {
-	public partial class Form1 : Form
+	public partial class frmTimesheet : Form
 	{
-		public Form1()
+		public frmTimesheet()
 		{
 			InitializeComponent();
 		}

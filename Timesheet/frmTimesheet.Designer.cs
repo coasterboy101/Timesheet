@@ -1,6 +1,6 @@
 ﻿namespace Timesheet
 {
-	partial class Form1
+	partial class frmTimesheet
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -28,12 +28,21 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTimesheet));
+			this.SuspendLayout();
+			// 
+			// frmTimesheet
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.Text = "Form1";
+			this.ClientSize = new System.Drawing.Size(584, 362);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "frmTimesheet";
+			this.Text = "frmTimesheet";
+			this.ResumeLayout(false);
+
 		}
 
 		#endregion
 	}
 }
-
