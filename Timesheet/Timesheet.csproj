@@ -66,11 +66,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmClientDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmClientDetails.Designer.cs">
+      <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployeeDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployeeDetails.Designer.cs">
+      <DependentUpon>frmEmployeeDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEmployees.Designer.cs">
+      <DependentUpon>frmEmployees.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmLogin.Designer.cs">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmNewEntry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmNewEntry.Designer.cs">
+      <DependentUpon>frmNewEntry.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProjectDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjectDetails.Designer.cs">
+      <DependentUpon>frmProjectDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProjects.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProjects.Designer.cs">
+      <DependentUpon>frmProjects.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReports.Designer.cs">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTaskDetails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTaskDetails.Designer.cs">
+      <DependentUpon>frmTaskDetails.cs</DependentUpon>
     </Compile>
     <Compile Include="frmTimesheet.cs">
       <SubType>Form</SubType>
@@ -80,8 +128,32 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmClientDetails.resx">
+      <DependentUpon>frmClientDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployeeDetails.resx">
+      <DependentUpon>frmEmployeeDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEmployees.resx">
+      <DependentUpon>frmEmployees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmNewEntry.resx">
+      <DependentUpon>frmNewEntry.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjectDetails.resx">
+      <DependentUpon>frmProjectDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProjects.resx">
+      <DependentUpon>frmProjects.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReports.resx">
+      <DependentUpon>frmReports.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTaskDetails.resx">
+      <DependentUpon>frmTaskDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTimesheet.resx">
       <DependentUpon>frmTimesheet.cs</DependentUpon>
@@ -108,7 +180,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\app_icon.ico" />
+    <Content Include="Icons\frm_client_details.ico" />
+    <Content Include="Icons\frm_employees.ico" />
+    <Content Include="Icons\frm_employee_details.ico" />
     <Content Include="Icons\frm_login.ico" />
+    <Content Include="Icons\frm_projects.ico" />
+    <Content Include="Icons\frm_project_details.ico" />
+    <Content Include="Icons\frm_reports.ico" />
+    <Content Include="Icons\frm_task_details.ico" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
