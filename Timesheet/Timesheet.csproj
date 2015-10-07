@@ -53,9 +53,14 @@
     <ApplicationIcon>Icons\app_icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data, Version=6.9.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -108,12 +113,6 @@
     <Compile Include="frmProjects.Designer.cs">
       <DependentUpon>frmProjects.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmReports.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmReports.Designer.cs">
-      <DependentUpon>frmReports.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmTaskDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,6 +127,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="timesheetDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>timesheetDataSet.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmClientDetails.resx">
       <DependentUpon>frmClientDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -148,9 +152,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmProjects.resx">
       <DependentUpon>frmProjects.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmReports.resx">
-      <DependentUpon>frmReports.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaskDetails.resx">
       <DependentUpon>frmTaskDetails.cs</DependentUpon>
@@ -177,6 +178,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="timesheetDataSet.xsc">
+      <DependentUpon>timesheetDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="timesheetDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>timesheetDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="timesheetDataSet.xss">
+      <DependentUpon>timesheetDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons\app_icon.ico" />
