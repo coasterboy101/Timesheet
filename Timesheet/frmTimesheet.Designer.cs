@@ -101,6 +101,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "frmTimesheet";
 			this.Text = "Timesheet";
+			this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmTimesheet_FormClosed);
 			this.Load += new System.EventHandler(this.frmTimesheet_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdTimesheet)).EndInit();
 			this.ResumeLayout(false);

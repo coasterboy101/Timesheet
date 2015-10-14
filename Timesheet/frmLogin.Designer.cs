@@ -76,7 +76,7 @@
 			this.txtPassword.Location = new System.Drawing.Point(92, 59);
 			this.txtPassword.Name = "txtPassword";
 			this.txtPassword.Size = new System.Drawing.Size(200, 20);
-			this.txtPassword.TabIndex = 6;
+			this.txtPassword.TabIndex = 1;
 			this.txtPassword.UseSystemPasswordChar = true;
 			// 
 			// frmLogin

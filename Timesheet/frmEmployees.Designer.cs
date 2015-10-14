@@ -87,6 +87,7 @@
 			this.Name = "frmEmployees";
 			this.ShowInTaskbar = false;
 			this.Text = "Employees";
+			this.Load += new System.EventHandler(this.frmEmployees_Load);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdEmployees)).EndInit();
 			this.ResumeLayout(false);
 
