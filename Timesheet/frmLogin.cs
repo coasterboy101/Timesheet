@@ -20,7 +20,7 @@ namespace Timesheet
 		{
 			InitializeComponent();
 
-			dbFunctions = new DatabaseFunctions();
+			dbFunctions = new DatabaseFunctions(Properties.Settings.Default.timesheetConnectionString);
 
 			dtUsers = new DataTable("Employees");
 		}
@@ -31,7 +31,7 @@ namespace Timesheet
 			cmdParams.Add(new MySqlParameter("p_EmpId", Convert.ToInt32(txtUserId.Text)));
 			cmdParams.Add(new MySqlParameter("p_Password", txtPassword.Text));
 
-			dtUsers = dbFunctions.FillStoredProc(Properties.Settings.Default.timesheetConnectionString, "Auth_User", cmdParams);
+			dtUsers = dbFunctions.FillStoredProc("Auth_User", cmdParams);
 
 			// Check the given user ID and password against the database, if it is incorrect, there will be no rows.
 			if (dtUsers.Rows.Count != 0)

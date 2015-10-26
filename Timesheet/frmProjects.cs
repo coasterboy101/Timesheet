@@ -20,6 +20,7 @@ namespace Timesheet
 		{
 			// Change the data displayed in dataGrdProjects to the selected table, and change
 			// the text property of btnAdd, btnEdit, and btnDelete to match.
+
 		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
