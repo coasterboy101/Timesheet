@@ -30,15 +30,15 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTimesheet));
 			this.dataGrdTimesheet = new System.Windows.Forms.DataGridView();
-			this.btnNewEntry = new System.Windows.Forms.Button();
-			this.btnReports = new System.Windows.Forms.Button();
-			this.btnEmployees = new System.Windows.Forms.Button();
-			this.btnProjects = new System.Windows.Forms.Button();
 			this.gcDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcHours = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcTask = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnNewEntry = new System.Windows.Forms.Button();
+			this.btnReports = new System.Windows.Forms.Button();
+			this.btnEmployees = new System.Windows.Forms.Button();
+			this.btnProjects = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdTimesheet)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -58,6 +58,36 @@
 			this.dataGrdTimesheet.Name = "dataGrdTimesheet";
 			this.dataGrdTimesheet.Size = new System.Drawing.Size(760, 407);
 			this.dataGrdTimesheet.TabIndex = 0;
+			// 
+			// gcDate
+			// 
+			this.gcDate.DataPropertyName = "Date";
+			this.gcDate.HeaderText = "Date";
+			this.gcDate.Name = "gcDate";
+			// 
+			// gcHours
+			// 
+			this.gcHours.DataPropertyName = "Hours";
+			this.gcHours.HeaderText = "Hours";
+			this.gcHours.Name = "gcHours";
+			// 
+			// gcProject
+			// 
+			this.gcProject.DataPropertyName = "ProjectName";
+			this.gcProject.HeaderText = "Project";
+			this.gcProject.Name = "gcProject";
+			// 
+			// gcClient
+			// 
+			this.gcClient.DataPropertyName = "ClientName";
+			this.gcClient.HeaderText = "Client";
+			this.gcClient.Name = "gcClient";
+			// 
+			// gcTask
+			// 
+			this.gcTask.DataPropertyName = "TaskName";
+			this.gcTask.HeaderText = "Task";
+			this.gcTask.Name = "gcTask";
 			// 
 			// btnNewEntry
 			// 
@@ -101,36 +131,6 @@
 			this.btnProjects.UseVisualStyleBackColor = true;
 			this.btnProjects.Visible = false;
 			this.btnProjects.Click += new System.EventHandler(this.btnProjects_Click);
-			// 
-			// gcDate
-			// 
-			this.gcDate.DataPropertyName = "Date";
-			this.gcDate.HeaderText = "Date";
-			this.gcDate.Name = "gcDate";
-			// 
-			// gcHours
-			// 
-			this.gcHours.DataPropertyName = "Hours";
-			this.gcHours.HeaderText = "Hours";
-			this.gcHours.Name = "gcHours";
-			// 
-			// gcProject
-			// 
-			this.gcProject.DataPropertyName = "ProjectName";
-			this.gcProject.HeaderText = "Project";
-			this.gcProject.Name = "gcProject";
-			// 
-			// gcClient
-			// 
-			this.gcClient.DataPropertyName = "ClientName";
-			this.gcClient.HeaderText = "Client";
-			this.gcClient.Name = "gcClient";
-			// 
-			// gcTask
-			// 
-			this.gcTask.DataPropertyName = "TaskName";
-			this.gcTask.HeaderText = "Task";
-			this.gcTask.Name = "gcTask";
 			// 
 			// frmTimesheet
 			// 

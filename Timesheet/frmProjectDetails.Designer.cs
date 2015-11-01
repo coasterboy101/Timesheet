@@ -118,7 +118,7 @@
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(110, 23);
 			this.btnAdd.TabIndex = 13;
-			this.btnAdd.Text = "Add Employees";
+			this.btnAdd.Text = "Add Employee";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
@@ -128,7 +128,7 @@
 			this.btnRemove.Name = "btnRemove";
 			this.btnRemove.Size = new System.Drawing.Size(110, 23);
 			this.btnRemove.TabIndex = 14;
-			this.btnRemove.Text = "Remove Employees";
+			this.btnRemove.Text = "Remove Employee";
 			this.btnRemove.UseVisualStyleBackColor = true;
 			this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
 			// 

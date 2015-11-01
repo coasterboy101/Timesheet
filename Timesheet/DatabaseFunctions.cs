@@ -28,7 +28,7 @@ namespace Timesheet
 		/// </summary>
 		/// <param name="procName">The name of the stored procedure to execute.</param>
 		/// <param name="parameters">The parameters to supply to stored procedure with.</param>
-		/// <returns></returns>
+		/// <returns>A datatable containing the result set.</returns>
 		public DataTable FillStoredProc(string procName, List<MySqlParameter> parameters)
 		{
 			using (dbConnection = new MySqlConnection(connString))
@@ -74,8 +74,36 @@ namespace Timesheet
 				}
 
 				// Execute the command.
-				
 				dbCommand.ExecuteNonQuery();
+			}
+		}
+
+		/// <summary>
+		/// Runs inline SQL code and returns a datatable containing the result set.
+		/// </summary>
+		/// <param name="sqlString">The inline SQL to run.</param>
+		/// <param name="parameters">The parameters contained in the inline SQL code.</param>
+		/// <returns>A datatable containing the result set.</returns>
+		public DataTable FillInlineSql(string sqlString, List<MySqlParameter> parameters)
+		{
+			using (dbConnection = new MySqlConnection(connString))
+			{
+				if (dbConnection.State != ConnectionState.Open) dbConnection.Open();
+
+				MySqlCommand dbCommand = new MySqlCommand(sqlString, dbConnection);
+
+				//Loop through the parameters, and add each on to dbCommand's parameter collection.
+				foreach (MySqlParameter param in parameters)
+				{
+					dbCommand.Parameters.Add(param);
+				}
+
+				// Fill the datatable with the result set, then return it.
+				DataTable dbTable = new DataTable("");
+				MySqlDataAdapter dbAdapter = new MySqlDataAdapter(dbCommand);
+				dbAdapter.Fill(dbTable);
+
+				return dbTable;
 			}
 		}
 

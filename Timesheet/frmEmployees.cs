@@ -78,7 +78,7 @@ namespace Timesheet
 			}
 			else
 			{
-				MessageBox.Show("Please select an employee to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show("Please select an employee to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 			}
 		}
 

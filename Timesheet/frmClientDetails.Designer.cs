@@ -35,11 +35,13 @@
 			this.txtDescription = new System.Windows.Forms.TextBox();
 			this.lblName = new System.Windows.Forms.Label();
 			this.txtName = new System.Windows.Forms.TextBox();
+			this.cboProject = new System.Windows.Forms.ComboBox();
+			this.lblProject = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// btnCancel
 			// 
-			this.btnCancel.Location = new System.Drawing.Point(297, 153);
+			this.btnCancel.Location = new System.Drawing.Point(297, 177);
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 11;
@@ -49,7 +51,7 @@
 			// 
 			// btnSave
 			// 
-			this.btnSave.Location = new System.Drawing.Point(216, 153);
+			this.btnSave.Location = new System.Drawing.Point(216, 177);
 			this.btnSave.Name = "btnSave";
 			this.btnSave.Size = new System.Drawing.Size(75, 23);
 			this.btnSave.TabIndex = 10;
@@ -59,7 +61,7 @@
 			// 
 			// lblDescription
 			// 
-			this.lblDescription.Location = new System.Drawing.Point(12, 36);
+			this.lblDescription.Location = new System.Drawing.Point(12, 61);
 			this.lblDescription.Name = "lblDescription";
 			this.lblDescription.Size = new System.Drawing.Size(75, 20);
 			this.lblDescription.TabIndex = 9;
@@ -68,15 +70,15 @@
 			// 
 			// txtDescription
 			// 
-			this.txtDescription.Location = new System.Drawing.Point(93, 36);
+			this.txtDescription.Location = new System.Drawing.Point(93, 61);
 			this.txtDescription.Multiline = true;
 			this.txtDescription.Name = "txtDescription";
-			this.txtDescription.Size = new System.Drawing.Size(250, 100);
+			this.txtDescription.Size = new System.Drawing.Size(279, 110);
 			this.txtDescription.TabIndex = 8;
 			// 
 			// lblName
 			// 
-			this.lblName.Location = new System.Drawing.Point(12, 10);
+			this.lblName.Location = new System.Drawing.Point(12, 35);
 			this.lblName.Name = "lblName";
 			this.lblName.Size = new System.Drawing.Size(75, 20);
 			this.lblName.TabIndex = 7;
@@ -85,16 +87,35 @@
 			// 
 			// txtName
 			// 
-			this.txtName.Location = new System.Drawing.Point(93, 10);
+			this.txtName.Location = new System.Drawing.Point(93, 35);
 			this.txtName.Name = "txtName";
-			this.txtName.Size = new System.Drawing.Size(250, 20);
+			this.txtName.Size = new System.Drawing.Size(279, 20);
 			this.txtName.TabIndex = 6;
+			// 
+			// cboProject
+			// 
+			this.cboProject.FormattingEnabled = true;
+			this.cboProject.Location = new System.Drawing.Point(93, 8);
+			this.cboProject.Name = "cboProject";
+			this.cboProject.Size = new System.Drawing.Size(279, 21);
+			this.cboProject.TabIndex = 12;
+			// 
+			// lblProject
+			// 
+			this.lblProject.Location = new System.Drawing.Point(12, 9);
+			this.lblProject.Name = "lblProject";
+			this.lblProject.Size = new System.Drawing.Size(75, 20);
+			this.lblProject.TabIndex = 13;
+			this.lblProject.Text = "Project Name:";
+			this.lblProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			// 
 			// frmClientDetails
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(384, 187);
+			this.ClientSize = new System.Drawing.Size(384, 212);
+			this.Controls.Add(this.lblProject);
+			this.Controls.Add(this.cboProject);
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnSave);
 			this.Controls.Add(this.lblDescription);
@@ -118,5 +139,7 @@
 		private System.Windows.Forms.TextBox txtDescription;
 		private System.Windows.Forms.Label lblName;
 		private System.Windows.Forms.TextBox txtName;
+		private System.Windows.Forms.ComboBox cboProject;
+		private System.Windows.Forms.Label lblProject;
 	}
 }

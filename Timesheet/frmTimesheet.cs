@@ -47,7 +47,8 @@ namespace Timesheet
 
 		private void btnNewEntry_Click(object sender, EventArgs e)
 		{
-			// Open frmNewEntry
+			frmNewEntry newForm = new frmNewEntry();
+			newForm.Show();
 		}
 
 		private void btnReports_Click(object sender, EventArgs e)
