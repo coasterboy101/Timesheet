@@ -31,38 +31,38 @@
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProjects));
 			this.tabCtlProjects = new System.Windows.Forms.TabControl();
 			this.tabProjects = new System.Windows.Forms.TabPage();
-			this.tabClients = new System.Windows.Forms.TabPage();
-			this.btnDeleteProject = new System.Windows.Forms.Button();
-			this.btnEditProject = new System.Windows.Forms.Button();
-			this.btnAddProject = new System.Windows.Forms.Button();
-			this.tabTasks = new System.Windows.Forms.TabPage();
 			this.dataGrdProjects = new System.Windows.Forms.DataGridView();
 			this.gcProjectId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcProjectName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcProjectDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnDeleteProject = new System.Windows.Forms.Button();
+			this.btnAddProject = new System.Windows.Forms.Button();
+			this.btnEditProject = new System.Windows.Forms.Button();
+			this.tabClients = new System.Windows.Forms.TabPage();
 			this.dataGrdClients = new System.Windows.Forms.DataGridView();
+			this.gcClientProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnDeleteClient = new System.Windows.Forms.Button();
 			this.btnAddClient = new System.Windows.Forms.Button();
 			this.btnEditClient = new System.Windows.Forms.Button();
+			this.tabTasks = new System.Windows.Forms.TabPage();
 			this.dataGrdTasks = new System.Windows.Forms.DataGridView();
-			this.btnDeleteTask = new System.Windows.Forms.Button();
-			this.btnAddTask = new System.Windows.Forms.Button();
-			this.btnEditTask = new System.Windows.Forms.Button();
 			this.gcTaskProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.gcTaskClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.gcClientProject = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnDeleteTask = new System.Windows.Forms.Button();
+			this.btnAddTask = new System.Windows.Forms.Button();
+			this.btnEditTask = new System.Windows.Forms.Button();
 			this.tabCtlProjects.SuspendLayout();
 			this.tabProjects.SuspendLayout();
-			this.tabClients.SuspendLayout();
-			this.tabTasks.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdProjects)).BeginInit();
+			this.tabClients.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdClients)).BeginInit();
+			this.tabTasks.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdTasks)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -95,63 +95,6 @@
 			this.tabProjects.TabIndex = 0;
 			this.tabProjects.Text = "Projects";
 			this.tabProjects.UseVisualStyleBackColor = true;
-			// 
-			// tabClients
-			// 
-			this.tabClients.Controls.Add(this.dataGrdClients);
-			this.tabClients.Controls.Add(this.btnDeleteClient);
-			this.tabClients.Controls.Add(this.btnAddClient);
-			this.tabClients.Controls.Add(this.btnEditClient);
-			this.tabClients.Location = new System.Drawing.Point(4, 24);
-			this.tabClients.Name = "tabClients";
-			this.tabClients.Padding = new System.Windows.Forms.Padding(3);
-			this.tabClients.Size = new System.Drawing.Size(652, 410);
-			this.tabClients.TabIndex = 1;
-			this.tabClients.Text = "Clients";
-			this.tabClients.UseVisualStyleBackColor = true;
-			// 
-			// btnDeleteProject
-			// 
-			this.btnDeleteProject.Location = new System.Drawing.Point(268, 6);
-			this.btnDeleteProject.Name = "btnDeleteProject";
-			this.btnDeleteProject.Size = new System.Drawing.Size(125, 25);
-			this.btnDeleteProject.TabIndex = 11;
-			this.btnDeleteProject.Text = "Delete Project";
-			this.btnDeleteProject.UseVisualStyleBackColor = true;
-			this.btnDeleteProject.Click += new System.EventHandler(this.btnDeleteProject_Click);
-			// 
-			// btnEditProject
-			// 
-			this.btnEditProject.Location = new System.Drawing.Point(137, 6);
-			this.btnEditProject.Name = "btnEditProject";
-			this.btnEditProject.Size = new System.Drawing.Size(125, 25);
-			this.btnEditProject.TabIndex = 10;
-			this.btnEditProject.Text = "Edit Project";
-			this.btnEditProject.UseVisualStyleBackColor = true;
-			this.btnEditProject.Click += new System.EventHandler(this.btnEditProject_Click);
-			// 
-			// btnAddProject
-			// 
-			this.btnAddProject.Location = new System.Drawing.Point(6, 6);
-			this.btnAddProject.Name = "btnAddProject";
-			this.btnAddProject.Size = new System.Drawing.Size(125, 25);
-			this.btnAddProject.TabIndex = 9;
-			this.btnAddProject.Text = "Add Project";
-			this.btnAddProject.UseVisualStyleBackColor = true;
-			this.btnAddProject.Click += new System.EventHandler(this.btnAddProject_Click);
-			// 
-			// tabTasks
-			// 
-			this.tabTasks.Controls.Add(this.dataGrdTasks);
-			this.tabTasks.Controls.Add(this.btnDeleteTask);
-			this.tabTasks.Controls.Add(this.btnAddTask);
-			this.tabTasks.Controls.Add(this.btnEditTask);
-			this.tabTasks.Location = new System.Drawing.Point(4, 24);
-			this.tabTasks.Name = "tabTasks";
-			this.tabTasks.Size = new System.Drawing.Size(652, 410);
-			this.tabTasks.TabIndex = 2;
-			this.tabTasks.Text = "Tasks";
-			this.tabTasks.UseVisualStyleBackColor = true;
 			// 
 			// dataGrdProjects
 			// 
@@ -199,6 +142,50 @@
 			this.gcProjectDescription.ReadOnly = true;
 			this.gcProjectDescription.Width = 300;
 			// 
+			// btnDeleteProject
+			// 
+			this.btnDeleteProject.Location = new System.Drawing.Point(268, 6);
+			this.btnDeleteProject.Name = "btnDeleteProject";
+			this.btnDeleteProject.Size = new System.Drawing.Size(125, 25);
+			this.btnDeleteProject.TabIndex = 11;
+			this.btnDeleteProject.Text = "Delete Project";
+			this.btnDeleteProject.UseVisualStyleBackColor = true;
+			this.btnDeleteProject.Click += new System.EventHandler(this.btnDeleteProject_Click);
+			// 
+			// btnAddProject
+			// 
+			this.btnAddProject.Location = new System.Drawing.Point(6, 6);
+			this.btnAddProject.Name = "btnAddProject";
+			this.btnAddProject.Size = new System.Drawing.Size(125, 25);
+			this.btnAddProject.TabIndex = 9;
+			this.btnAddProject.Text = "Add Project";
+			this.btnAddProject.UseVisualStyleBackColor = true;
+			this.btnAddProject.Click += new System.EventHandler(this.btnAddProject_Click);
+			// 
+			// btnEditProject
+			// 
+			this.btnEditProject.Location = new System.Drawing.Point(137, 6);
+			this.btnEditProject.Name = "btnEditProject";
+			this.btnEditProject.Size = new System.Drawing.Size(125, 25);
+			this.btnEditProject.TabIndex = 10;
+			this.btnEditProject.Text = "Edit Project";
+			this.btnEditProject.UseVisualStyleBackColor = true;
+			this.btnEditProject.Click += new System.EventHandler(this.btnEditProject_Click);
+			// 
+			// tabClients
+			// 
+			this.tabClients.Controls.Add(this.dataGrdClients);
+			this.tabClients.Controls.Add(this.btnDeleteClient);
+			this.tabClients.Controls.Add(this.btnAddClient);
+			this.tabClients.Controls.Add(this.btnEditClient);
+			this.tabClients.Location = new System.Drawing.Point(4, 24);
+			this.tabClients.Name = "tabClients";
+			this.tabClients.Padding = new System.Windows.Forms.Padding(3);
+			this.tabClients.Size = new System.Drawing.Size(652, 410);
+			this.tabClients.TabIndex = 1;
+			this.tabClients.Text = "Clients";
+			this.tabClients.UseVisualStyleBackColor = true;
+			// 
 			// dataGrdClients
 			// 
 			this.dataGrdClients.AllowUserToAddRows = false;
@@ -219,6 +206,40 @@
 			this.dataGrdClients.Size = new System.Drawing.Size(640, 367);
 			this.dataGrdClients.TabIndex = 16;
 			// 
+			// gcClientProject
+			// 
+			this.gcClientProject.DataPropertyName = "ProjectName";
+			this.gcClientProject.HeaderText = "Project";
+			this.gcClientProject.Name = "gcClientProject";
+			this.gcClientProject.ReadOnly = true;
+			// 
+			// dataGridViewTextBoxColumn1
+			// 
+			this.dataGridViewTextBoxColumn1.DataPropertyName = "ClientId";
+			this.dataGridViewTextBoxColumn1.HeaderText = "Client ID";
+			this.dataGridViewTextBoxColumn1.MinimumWidth = 75;
+			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+			this.dataGridViewTextBoxColumn1.ReadOnly = true;
+			this.dataGridViewTextBoxColumn1.Width = 75;
+			// 
+			// dataGridViewTextBoxColumn2
+			// 
+			this.dataGridViewTextBoxColumn2.DataPropertyName = "ClientName";
+			this.dataGridViewTextBoxColumn2.HeaderText = "Client Name";
+			this.dataGridViewTextBoxColumn2.MinimumWidth = 125;
+			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+			this.dataGridViewTextBoxColumn2.ReadOnly = true;
+			this.dataGridViewTextBoxColumn2.Width = 125;
+			// 
+			// dataGridViewTextBoxColumn3
+			// 
+			this.dataGridViewTextBoxColumn3.DataPropertyName = "ClientDescription";
+			this.dataGridViewTextBoxColumn3.HeaderText = "Client Description";
+			this.dataGridViewTextBoxColumn3.MinimumWidth = 300;
+			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+			this.dataGridViewTextBoxColumn3.ReadOnly = true;
+			this.dataGridViewTextBoxColumn3.Width = 300;
+			// 
 			// btnDeleteClient
 			// 
 			this.btnDeleteClient.Location = new System.Drawing.Point(268, 6);
@@ -227,6 +248,7 @@
 			this.btnDeleteClient.TabIndex = 15;
 			this.btnDeleteClient.Text = "Delete Client";
 			this.btnDeleteClient.UseVisualStyleBackColor = true;
+			this.btnDeleteClient.Click += new System.EventHandler(this.btnDeleteClient_Click);
 			// 
 			// btnAddClient
 			// 
@@ -236,6 +258,7 @@
 			this.btnAddClient.TabIndex = 13;
 			this.btnAddClient.Text = "Add Client";
 			this.btnAddClient.UseVisualStyleBackColor = true;
+			this.btnAddClient.Click += new System.EventHandler(this.btnAddClient_Click);
 			// 
 			// btnEditClient
 			// 
@@ -245,6 +268,20 @@
 			this.btnEditClient.TabIndex = 14;
 			this.btnEditClient.Text = "Edit Client";
 			this.btnEditClient.UseVisualStyleBackColor = true;
+			this.btnEditClient.Click += new System.EventHandler(this.btnEditClient_Click);
+			// 
+			// tabTasks
+			// 
+			this.tabTasks.Controls.Add(this.dataGrdTasks);
+			this.tabTasks.Controls.Add(this.btnDeleteTask);
+			this.tabTasks.Controls.Add(this.btnAddTask);
+			this.tabTasks.Controls.Add(this.btnEditTask);
+			this.tabTasks.Location = new System.Drawing.Point(4, 24);
+			this.tabTasks.Name = "tabTasks";
+			this.tabTasks.Size = new System.Drawing.Size(652, 410);
+			this.tabTasks.TabIndex = 2;
+			this.tabTasks.Text = "Tasks";
+			this.tabTasks.UseVisualStyleBackColor = true;
 			// 
 			// dataGrdTasks
 			// 
@@ -266,33 +303,6 @@
 			this.dataGrdTasks.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 			this.dataGrdTasks.Size = new System.Drawing.Size(640, 367);
 			this.dataGrdTasks.TabIndex = 16;
-			// 
-			// btnDeleteTask
-			// 
-			this.btnDeleteTask.Location = new System.Drawing.Point(268, 6);
-			this.btnDeleteTask.Name = "btnDeleteTask";
-			this.btnDeleteTask.Size = new System.Drawing.Size(125, 25);
-			this.btnDeleteTask.TabIndex = 15;
-			this.btnDeleteTask.Text = "Delete Task";
-			this.btnDeleteTask.UseVisualStyleBackColor = true;
-			// 
-			// btnAddTask
-			// 
-			this.btnAddTask.Location = new System.Drawing.Point(6, 6);
-			this.btnAddTask.Name = "btnAddTask";
-			this.btnAddTask.Size = new System.Drawing.Size(125, 25);
-			this.btnAddTask.TabIndex = 13;
-			this.btnAddTask.Text = "Add Task";
-			this.btnAddTask.UseVisualStyleBackColor = true;
-			// 
-			// btnEditTask
-			// 
-			this.btnEditTask.Location = new System.Drawing.Point(137, 6);
-			this.btnEditTask.Name = "btnEditTask";
-			this.btnEditTask.Size = new System.Drawing.Size(125, 25);
-			this.btnEditTask.TabIndex = 14;
-			this.btnEditTask.Text = "Edit Task";
-			this.btnEditTask.UseVisualStyleBackColor = true;
 			// 
 			// gcTaskProject
 			// 
@@ -335,39 +345,35 @@
 			this.dataGridViewTextBoxColumn6.ReadOnly = true;
 			this.dataGridViewTextBoxColumn6.Width = 300;
 			// 
-			// gcClientProject
+			// btnDeleteTask
 			// 
-			this.gcClientProject.DataPropertyName = "ProjectName";
-			this.gcClientProject.HeaderText = "Project";
-			this.gcClientProject.Name = "gcClientProject";
-			this.gcClientProject.ReadOnly = true;
+			this.btnDeleteTask.Location = new System.Drawing.Point(268, 6);
+			this.btnDeleteTask.Name = "btnDeleteTask";
+			this.btnDeleteTask.Size = new System.Drawing.Size(125, 25);
+			this.btnDeleteTask.TabIndex = 15;
+			this.btnDeleteTask.Text = "Delete Task";
+			this.btnDeleteTask.UseVisualStyleBackColor = true;
+			this.btnDeleteTask.Click += new System.EventHandler(this.btnDeleteTask_Click);
 			// 
-			// dataGridViewTextBoxColumn1
+			// btnAddTask
 			// 
-			this.dataGridViewTextBoxColumn1.DataPropertyName = "ClientId";
-			this.dataGridViewTextBoxColumn1.HeaderText = "Client ID";
-			this.dataGridViewTextBoxColumn1.MinimumWidth = 75;
-			this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-			this.dataGridViewTextBoxColumn1.ReadOnly = true;
-			this.dataGridViewTextBoxColumn1.Width = 75;
+			this.btnAddTask.Location = new System.Drawing.Point(6, 6);
+			this.btnAddTask.Name = "btnAddTask";
+			this.btnAddTask.Size = new System.Drawing.Size(125, 25);
+			this.btnAddTask.TabIndex = 13;
+			this.btnAddTask.Text = "Add Task";
+			this.btnAddTask.UseVisualStyleBackColor = true;
+			this.btnAddTask.Click += new System.EventHandler(this.btnAddTask_Click);
 			// 
-			// dataGridViewTextBoxColumn2
+			// btnEditTask
 			// 
-			this.dataGridViewTextBoxColumn2.DataPropertyName = "ClientName";
-			this.dataGridViewTextBoxColumn2.HeaderText = "Client Name";
-			this.dataGridViewTextBoxColumn2.MinimumWidth = 125;
-			this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-			this.dataGridViewTextBoxColumn2.ReadOnly = true;
-			this.dataGridViewTextBoxColumn2.Width = 125;
-			// 
-			// dataGridViewTextBoxColumn3
-			// 
-			this.dataGridViewTextBoxColumn3.DataPropertyName = "ClientDescription";
-			this.dataGridViewTextBoxColumn3.HeaderText = "Client Description";
-			this.dataGridViewTextBoxColumn3.MinimumWidth = 300;
-			this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-			this.dataGridViewTextBoxColumn3.ReadOnly = true;
-			this.dataGridViewTextBoxColumn3.Width = 300;
+			this.btnEditTask.Location = new System.Drawing.Point(137, 6);
+			this.btnEditTask.Name = "btnEditTask";
+			this.btnEditTask.Size = new System.Drawing.Size(125, 25);
+			this.btnEditTask.TabIndex = 14;
+			this.btnEditTask.Text = "Edit Task";
+			this.btnEditTask.UseVisualStyleBackColor = true;
+			this.btnEditTask.Click += new System.EventHandler(this.btnEditTask_Click);
 			// 
 			// frmProjects
 			// 
@@ -382,10 +388,10 @@
 			this.Load += new System.EventHandler(this.frmProjects_Load);
 			this.tabCtlProjects.ResumeLayout(false);
 			this.tabProjects.ResumeLayout(false);
-			this.tabClients.ResumeLayout(false);
-			this.tabTasks.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdProjects)).EndInit();
+			this.tabClients.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdClients)).EndInit();
+			this.tabTasks.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.dataGrdTasks)).EndInit();
 			this.ResumeLayout(false);
 

@@ -41,7 +41,7 @@ namespace Timesheet
 
 		private void btnAddProject_Click(object sender, EventArgs e)
 		{
-			// Open frmEmployeeDetails with all fields blank.
+			// Open frmProjectDetails with all fields blank.
 			frmProjectDetails newProject = new frmProjectDetails();
 			newProject.FormClosed += ProjectDetails_FormClosed;
 			newProject.Show();
@@ -56,7 +56,7 @@ namespace Timesheet
 				// Get the currently selected row.
 				selectedRow = ((DataRowView)dataGrdProjects.SelectedRows[0].DataBoundItem).Row;
 
-				// Open frmEmployeeDetails with the values of the selected row filled in.
+				// Open frmClientDetails with the values of the selected row filled in.
 				frmProjectDetails editProject = new frmProjectDetails(selectedRow);
 				editProject.FormClosed += ProjectDetails_FormClosed;
 				editProject.Show();
@@ -77,7 +77,7 @@ namespace Timesheet
 				List<MySqlParameter> dbParams = new List<MySqlParameter>();
 				dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
 
-				// Remove the selected row and delete all of the timesheet entries created by the corresponding employee.
+				// Remove the selected row.
 				dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
 
 				// Refresh the data grid.
@@ -94,6 +94,84 @@ namespace Timesheet
 		{
 			dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
 			dataGrdProjects.DataSource = dtProjects;
+		}
+
+		private void btnAddClient_Click(object sender, EventArgs e)
+		{
+			// Open frmClientDetails with all fields blank.
+			frmClientDetails newClient = new frmClientDetails();
+			newClient.FormClosed += ClientDetails_FormClosed;
+			newClient.Show();
+		}
+
+		private void btnEditClient_Click(object sender, EventArgs e)
+		{
+			DataRow selectedRow;
+
+			if (dataGrdClients.SelectedRows.Count != 0)
+			{
+				// Get the currently selected row.
+				selectedRow = ((DataRowView)dataGrdClients.SelectedRows[0].DataBoundItem).Row;
+
+				// Open frmClientDetails with the values of the selected row filled in.
+				frmClientDetails editClient = new frmClientDetails(selectedRow);
+				editClient.FormClosed += ProjectDetails_FormClosed;
+				editClient.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select a client to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
+
+		private void btnDeleteClient_Click(object sender, EventArgs e)
+		{
+			if (dataGrdClients.SelectedRows.Count != 0)
+			{
+				// Get the currently selected row.
+				int clientId = Convert.ToInt32(((DataRowView)dataGrdClients.SelectedRows[0].DataBoundItem).Row["ClientId"].ToString());
+
+				List<MySqlParameter> dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_ClientId", clientId));
+
+				// Remove the selected row.
+				dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
+
+				// Refresh the data grid.
+				dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+				dataGrdClients.DataSource = dtClients;
+			}
+			else
+			{
+				MessageBox.Show("Please select a client to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
+		}
+
+		private void ClientDetails_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+			dataGrdClients.DataSource = dtClients;
+		}
+
+		private void btnAddTask_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnEditTask_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void btnDeleteTask_Click(object sender, EventArgs e)
+		{
+			
+		}
+
+		private void TaskDetails_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
 		}
 	}
 }
