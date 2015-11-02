@@ -6,18 +6,28 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using MySql.Data.MySqlClient;
 
 namespace Timesheet
 {
 	public partial class frmTimesheet : Form
 	{
+		private DataTable dtTimesheet;
+
+		private DataRow drEmployee;
+
+		private DatabaseFunctions dbFunctions;	
+
 		private string employeeType;
 
-		public frmTimesheet(string employeeType)
+		public frmTimesheet(DataRow drEmployee)
 		{
 			InitializeComponent();
 
-			this.employeeType = employeeType;
+			dbFunctions = new DatabaseFunctions(Properties.Settings.Default.timesheetConnectionString);
+
+			this.drEmployee = drEmployee;
+			employeeType = drEmployee["EmployeeType"].ToString();
 		}
 
 		private void frmTimesheet_Load(object sender, EventArgs e)
@@ -43,11 +53,19 @@ namespace Timesheet
 					btnProjects.Visible = true;
 					break;
 			}
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("p_EmpId", drEmployee["EmpId"].ToString()));
+
+			dtTimesheet = dbFunctions.FillStoredProc("Load_Timesheet", dbParams);
+
+			dataGrdTimesheet.DataSource = dtTimesheet;
 		}
 
 		private void btnNewEntry_Click(object sender, EventArgs e)
 		{
-			frmNewEntry newForm = new frmNewEntry();
+			frmNewEntry newForm = new frmNewEntry(drEmployee["EmpId"].ToString());
+			newForm.FormClosed += NewForm_FormClosed;
 			newForm.Show();
 		}
 
@@ -66,6 +84,16 @@ namespace Timesheet
 		{
 			frmProjects newForm = new frmProjects();
 			newForm.Show();
+		}
+
+		private void NewForm_FormClosed(object sender, FormClosedEventArgs e)
+		{
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("p_EmpId", drEmployee["EmpId"]));
+
+			dtTimesheet = dbFunctions.FillStoredProc("Load_Timesheet", dbParams);
+
+			dataGrdTimesheet.DataSource = dtTimesheet;
 		}
 
 		private void frmTimesheet_FormClosed(object sender, FormClosedEventArgs e)

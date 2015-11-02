@@ -44,6 +44,8 @@
 			// 
 			// dataGrdTimesheet
 			// 
+			this.dataGrdTimesheet.AllowUserToAddRows = false;
+			this.dataGrdTimesheet.AllowUserToDeleteRows = false;
 			this.dataGrdTimesheet.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -56,6 +58,7 @@
             this.gcTask});
 			this.dataGrdTimesheet.Location = new System.Drawing.Point(12, 43);
 			this.dataGrdTimesheet.Name = "dataGrdTimesheet";
+			this.dataGrdTimesheet.ReadOnly = true;
 			this.dataGrdTimesheet.Size = new System.Drawing.Size(760, 407);
 			this.dataGrdTimesheet.TabIndex = 0;
 			// 
@@ -64,30 +67,35 @@
 			this.gcDate.DataPropertyName = "Date";
 			this.gcDate.HeaderText = "Date";
 			this.gcDate.Name = "gcDate";
+			this.gcDate.ReadOnly = true;
 			// 
 			// gcHours
 			// 
 			this.gcHours.DataPropertyName = "Hours";
 			this.gcHours.HeaderText = "Hours";
 			this.gcHours.Name = "gcHours";
+			this.gcHours.ReadOnly = true;
 			// 
 			// gcProject
 			// 
 			this.gcProject.DataPropertyName = "ProjectName";
 			this.gcProject.HeaderText = "Project";
 			this.gcProject.Name = "gcProject";
+			this.gcProject.ReadOnly = true;
 			// 
 			// gcClient
 			// 
 			this.gcClient.DataPropertyName = "ClientName";
 			this.gcClient.HeaderText = "Client";
 			this.gcClient.Name = "gcClient";
+			this.gcClient.ReadOnly = true;
 			// 
 			// gcTask
 			// 
 			this.gcTask.DataPropertyName = "TaskName";
 			this.gcTask.HeaderText = "Task";
 			this.gcTask.Name = "gcTask";
+			this.gcTask.ReadOnly = true;
 			// 
 			// btnNewEntry
 			// 

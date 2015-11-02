@@ -109,6 +109,7 @@
 			this.cboProject.Name = "cboProject";
 			this.cboProject.Size = new System.Drawing.Size(150, 21);
 			this.cboProject.TabIndex = 6;
+			this.cboProject.SelectedIndexChanged += new System.EventHandler(this.cboProject_SelectedIndexChanged);
 			// 
 			// cboClient
 			// 
@@ -117,6 +118,7 @@
 			this.cboClient.Name = "cboClient";
 			this.cboClient.Size = new System.Drawing.Size(150, 21);
 			this.cboClient.TabIndex = 7;
+			this.cboClient.SelectedIndexChanged += new System.EventHandler(this.cboClient_SelectedIndexChanged);
 			// 
 			// cboTask
 			// 
@@ -135,6 +137,11 @@
 			// cboMinutes
 			// 
 			this.cboMinutes.FormattingEnabled = true;
+			this.cboMinutes.Items.AddRange(new object[] {
+            "0",
+            "15",
+            "30",
+            "45"});
 			this.cboMinutes.Location = new System.Drawing.Point(173, 93);
 			this.cboMinutes.Name = "cboMinutes";
 			this.cboMinutes.Size = new System.Drawing.Size(45, 21);
@@ -143,6 +150,32 @@
 			// cboHours
 			// 
 			this.cboHours.FormattingEnabled = true;
+			this.cboHours.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24"});
 			this.cboHours.Location = new System.Drawing.Point(68, 93);
 			this.cboHours.Name = "cboHours";
 			this.cboHours.Size = new System.Drawing.Size(45, 21);

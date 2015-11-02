@@ -39,7 +39,7 @@ namespace Timesheet
 				// Make sure that they are still employed.
 				if (Convert.ToInt32(dtUsers.Rows[0]["Status"].ToString()) == 1)
 				{
-					frmTimesheet newTimesheet = new frmTimesheet(dtUsers.Rows[0]["EmployeeType"].ToString());
+					frmTimesheet newTimesheet = new frmTimesheet(dtUsers.Rows[0]);
 					newTimesheet.Show();
 					this.Hide();
 				}
