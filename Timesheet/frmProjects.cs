@@ -115,7 +115,7 @@ namespace Timesheet
 
 				// Open frmClientDetails with the values of the selected row filled in.
 				frmClientDetails editClient = new frmClientDetails(selectedRow);
-				editClient.FormClosed += ProjectDetails_FormClosed;
+				editClient.FormClosed += ClientDetails_FormClosed;
 				editClient.Show();
 			}
 			else
@@ -155,17 +155,53 @@ namespace Timesheet
 
 		private void btnAddTask_Click(object sender, EventArgs e)
 		{
-
+			// Open frmTaskDetails with all fields blank.
+			frmTaskDetails newTask = new frmTaskDetails();
+			newTask.FormClosed += TaskDetails_FormClosed;
+			newTask.Show();
 		}
 
 		private void btnEditTask_Click(object sender, EventArgs e)
 		{
+			DataRow selectedRow;
 
+			if (dataGrdTasks.SelectedRows.Count != 0)
+			{
+				// Get the currently selected row.
+				selectedRow = ((DataRowView)dataGrdTasks.SelectedRows[0].DataBoundItem).Row;
+
+				// Open frmClientDetails with the values of the selected row filled in.
+				frmTaskDetails editTask = new frmTaskDetails(selectedRow);
+				editTask.FormClosed += TaskDetails_FormClosed;
+				editTask.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select a task to edit.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 		}
 
 		private void btnDeleteTask_Click(object sender, EventArgs e)
 		{
-			
+			if (dataGrdClients.SelectedRows.Count != 0)
+			{
+				// Get the currently selected row.
+				int taskId = Convert.ToInt32(((DataRowView)dataGrdTasks.SelectedRows[0].DataBoundItem).Row["TaskId"].ToString());
+
+				List<MySqlParameter> dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_TaskId", taskId));
+
+				// Remove the selected row.
+				dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
+
+				// Refresh the data grid.
+				dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+				dataGrdTasks.DataSource = dtTasks;
+			}
+			else
+			{
+				MessageBox.Show("Please select a task to delete.", "No Selection", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 		}
 
 		private void TaskDetails_FormClosed(object sender, FormClosedEventArgs e)

@@ -110,6 +110,7 @@
 			this.cboProject.Name = "cboProject";
 			this.cboProject.Size = new System.Drawing.Size(279, 21);
 			this.cboProject.TabIndex = 14;
+			this.cboProject.SelectedIndexChanged += new System.EventHandler(this.cboProject_SelectedIndexChanged);
 			// 
 			// lblClient
 			// 
