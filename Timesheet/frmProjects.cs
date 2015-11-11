@@ -183,7 +183,7 @@ namespace Timesheet
 
 		private void btnDeleteTask_Click(object sender, EventArgs e)
 		{
-			if (dataGrdClients.SelectedRows.Count != 0)
+			if (dataGrdTasks.SelectedRows.Count != 0)
 			{
 				// Get the currently selected row.
 				int taskId = Convert.ToInt32(((DataRowView)dataGrdTasks.SelectedRows[0].DataBoundItem).Row["TaskId"].ToString());
