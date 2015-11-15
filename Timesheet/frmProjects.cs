@@ -99,6 +99,7 @@ namespace Timesheet
 						DeleteTimesheets(dtProjectTimesheets);
 						DeleteTasks(dtProjectTasks);
 						DeleteClients(dtProjectClients);
+						DeleteProject(projectId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -119,6 +120,7 @@ namespace Timesheet
 					{
 						DeleteTasks(dtProjectTasks);
 						DeleteClients(dtProjectClients);
+						DeleteProject(projectId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -138,6 +140,7 @@ namespace Timesheet
 					if (result == DialogResult.OK)
 					{
 						DeleteClients(dtProjectClients);
+						DeleteProject(projectId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -156,14 +159,7 @@ namespace Timesheet
 					// User wants to continue, go ahead and delete the project.
 					if (result == DialogResult.OK)
 					{
-						// Delete the selected Project.
-						dbParams = new List<MySqlParameter>();
-						dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
-						dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
-
-						// Refresh the data grid.
-						dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
-						dataGrdProjects.DataSource = dtProjects;
+						DeleteProject(projectId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -180,8 +176,17 @@ namespace Timesheet
 
 		private void ProjectDetails_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			// Reload the Projects datagrid.
 			dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
 			dataGrdProjects.DataSource = dtProjects;
+
+			// Reload the Clients datagrid.
+			dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+			dataGrdClients.DataSource = dtClients;
+
+			// Reload the Tasks datagrid.
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
 		}
 
 		private void btnAddClient_Click(object sender, EventArgs e)
@@ -241,6 +246,7 @@ namespace Timesheet
 					{
 						DeleteTimesheets(dtClientTimesheets);
 						DeleteTasks(dtClientTasks);
+						DeleteClient(clientId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -260,6 +266,7 @@ namespace Timesheet
 					if (result == DialogResult.OK)
 					{
 						DeleteTasks(dtClientTasks);
+						DeleteClient(clientId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -278,14 +285,7 @@ namespace Timesheet
 					// User wants to continue, go ahead and delete Task references.
 					if (result == DialogResult.OK)
 					{
-						// Delete the selected entry.
-						dbParams = new List<MySqlParameter>();
-						dbParams.Add(new MySqlParameter("p_ClientId", clientId));
-						dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
-
-						// Refresh the data grid.
-						dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
-						dataGrdClients.DataSource = dtClients;
+						DeleteClient(clientId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -302,8 +302,13 @@ namespace Timesheet
 
 		private void ClientDetails_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			// Reload the Clients datagrid.
 			dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
 			dataGrdClients.DataSource = dtClients;
+
+			// Reload the Tasks datagrid.
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
 		}
 
 		private void btnAddTask_Click(object sender, EventArgs e)
@@ -361,6 +366,7 @@ namespace Timesheet
 					if (result == DialogResult.OK)
 					{
 						DeleteTimesheets(dtTimesheet);
+						DeleteTask(taskId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -378,14 +384,7 @@ namespace Timesheet
 					// User wants to continue, go ahead and delete Timesheet references.
 					if (result == DialogResult.OK)
 					{
-						// Delete the selected Task.
-						dbParams = new List<MySqlParameter>();
-						dbParams.Add(new MySqlParameter("p_TaskId", taskId));
-						dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
-
-						// Refresh the data grid.
-						dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
-						dataGrdTasks.DataSource = dtTasks;
+						DeleteTask(taskId);
 					}
 					// User does not want to continue, cancel the operation.
 					else
@@ -402,6 +401,7 @@ namespace Timesheet
 
 		private void TaskDetails_FormClosed(object sender, FormClosedEventArgs e)
 		{
+			// Reload the Tasks datagrid.
 			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
 			dataGrdTasks.DataSource = dtTasks;
 		}
@@ -590,6 +590,66 @@ namespace Timesheet
 
 				dbFunctions.ExecuteStoredProc("Delete_Project_Employee", dbParams);
 			}
+		}
+
+		/// <summary>
+		/// Deletes a single project from the database.
+		/// </summary>
+		/// <param name="projectId">The ID of the project to delete.</param>
+		private void DeleteProject(int projectId)
+		{
+			// Delete the selected Project.
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
+			dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
+
+			// Reload the Projects datagrid.
+			dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
+			dataGrdProjects.DataSource = dtProjects;
+
+			// Reload the Clients datagrid.
+			dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+			dataGrdClients.DataSource = dtClients;
+
+			// Reload the Tasks datagrid.
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
+		}
+
+		/// <summary>
+		/// Deletes a single client from the database.
+		/// </summary>
+		/// <param name="clientId">The ID of the client to delete.</param>
+		private void DeleteClient(int clientId)
+		{
+			// Delete the selected entry.
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("p_ClientId", clientId));
+			dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
+
+			// Reload the Clients datagrid.
+			dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+			dataGrdClients.DataSource = dtClients;
+
+			// Reload the Tasks datagrid.
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
+		}
+
+		/// <summary>
+		/// Deletes a single task from the database.
+		/// </summary>
+		/// <param name="taskId">The ID of the task to delete.</param>
+		private void DeleteTask(int taskId)
+		{
+			// Delete the selected Task.
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("p_TaskId", taskId));
+			dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
+
+			// Reload the Tasks datagrid.
+			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+			dataGrdTasks.DataSource = dtTasks;
 		}
 	}
 }
