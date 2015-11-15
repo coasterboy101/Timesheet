@@ -79,6 +79,14 @@ namespace Timesheet
 						break;
 				}
 
+				// If the user has entered 0 for the time, scold them.
+				if (time <= 0)
+				{
+					MessageBox.Show("Please enter a valid number of hours or minutes.", "Invalid Hours", MessageBoxButtons.OK, 
+						MessageBoxIcon.Error);
+					return;
+				}
+
 				List<MySqlParameter> dbParams = new List<MySqlParameter>();
 				dbParams.Add(new MySqlParameter("p_Date", clndrDate.SelectionStart));
 				dbParams.Add(new MySqlParameter("p_Hours", time));
