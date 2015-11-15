@@ -145,15 +145,32 @@ namespace Timesheet
 						return;
 					}
 				}
+				// Project has no references.
+				else
+				{
+					messageText = String.Format("Deleting a project cannot be undone. Are you sure you want to continue?",
+						dtProjectClients.Rows.Count);
 
-				// Delete the selected Project.
-				dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
-				dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				// Refresh the data grid.
-				dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
-				dataGrdProjects.DataSource = dtProjects;
+					// User wants to continue, go ahead and delete the project.
+					if (result == DialogResult.OK)
+					{
+						// Delete the selected Project.
+						dbParams = new List<MySqlParameter>();
+						dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
+						dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
+
+						// Refresh the data grid.
+						dtProjects = dbFunctions.FillStoredProc("Load_Projects", new List<MySqlParameter>());
+						dataGrdProjects.DataSource = dtProjects;
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
 			}
 			else
 			{
@@ -250,15 +267,32 @@ namespace Timesheet
 						return;
 					}
 				}
+				// Client has no references.
+				else
+				{
+					messageText = String.Format("Deleting a client cannot be undone. Are you sure you want to continue?", 
+						dtClientTasks.Rows.Count);
 
-				// Delete the selected entry.
-				dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_ClientId", clientId));
-				dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				// Refresh the data grid.
-				dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
-				dataGrdClients.DataSource = dtClients;
+					// User wants to continue, go ahead and delete Task references.
+					if (result == DialogResult.OK)
+					{
+						// Delete the selected entry.
+						dbParams = new List<MySqlParameter>();
+						dbParams.Add(new MySqlParameter("p_ClientId", clientId));
+						dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
+
+						// Refresh the data grid.
+						dtClients = dbFunctions.FillStoredProc("Load_Clients", new List<MySqlParameter>());
+						dataGrdClients.DataSource = dtClients;
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
 			}
 			else
 			{
@@ -334,15 +368,31 @@ namespace Timesheet
 						return;
 					}
 				}
+				else
+				{
+					messageText = String.Format("Deleting a task cannot be undone. Are you sure you want to continue?", 
+						dtTimesheet.Rows.Count);
 
-				// Delete the selected Task.
-				dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_TaskId", taskId));
-				dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-				// Refresh the data grid.
-				dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
-				dataGrdTasks.DataSource = dtTasks;
+					// User wants to continue, go ahead and delete Timesheet references.
+					if (result == DialogResult.OK)
+					{
+						// Delete the selected Task.
+						dbParams = new List<MySqlParameter>();
+						dbParams.Add(new MySqlParameter("p_TaskId", taskId));
+						dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
+
+						// Refresh the data grid.
+						dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
+						dataGrdTasks.DataSource = dtTasks;
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
 			}
 			else
 			{
