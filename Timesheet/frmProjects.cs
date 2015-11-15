@@ -71,13 +71,84 @@ namespace Timesheet
 		{
 			if (dataGrdProjects.SelectedRows.Count != 0)
 			{
-				// Get the currently selected row.
-				int projectId = Convert.ToInt32(((DataRowView)dataGrdProjects.SelectedRows[0].DataBoundItem).Row["ProjectId"].ToString());
+				string messageText;
+				DialogResult result;
 
 				List<MySqlParameter> dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
 
-				// Remove the selected row.
+				// Get the currently selected Project's ID.
+				int projectId = Convert.ToInt32(((DataRowView)dataGrdProjects.SelectedRows[0].DataBoundItem).Row["ProjectId"].ToString());
+
+				// Get any referenced rows.
+				DataTable dtProjectTimesheets = GetProjectTimesheets(projectId);
+				DataTable dtProjectClients = GetProjectClients(projectId);
+				DataTable dtProjectTasks = GetProjectTasks(projectId);
+
+				// Project has Client, Task, and Timesheet references.
+				if (dtProjectTimesheets.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this project will delete {0} clients, {1} tasks, and {2} timesheet records. " 
+						+ "Are you sure you want to continue?", dtProjectClients.Rows.Count, dtProjectTasks.Rows.Count, 
+						dtProjectTimesheets.Rows.Count);
+
+          result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Client, Task, and Timesheet references.
+					if (result == DialogResult.OK)
+					{
+						DeleteTimesheets(dtProjectTimesheets);
+						DeleteTasks(dtProjectTasks);
+						DeleteClients(dtProjectClients);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+				// Project has Client and Task references.
+				else if (dtProjectClients.Rows.Count > 0 && dtProjectTasks.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this project will delete {0} clients and {1} tasks. " 
+						+ "Are you sure you want to continue?", dtProjectClients.Rows.Count, dtProjectTasks.Rows.Count);
+
+          result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Client and Task references.
+					if (result == DialogResult.OK)
+					{
+						DeleteTasks(dtProjectTasks);
+						DeleteClients(dtProjectClients);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+				// Project has Client references
+				else if (dtProjectClients.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this project will delete {0} clients. "
+						+ "Are you sure you want to continue?", dtProjectClients.Rows.Count);
+
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Client references.
+					if (result == DialogResult.OK)
+					{
+						DeleteClients(dtProjectClients);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+
+				// Delete the selected Project.
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
 				dbFunctions.ExecuteStoredProc("Delete_Project", dbParams);
 
 				// Refresh the data grid.
@@ -128,13 +199,61 @@ namespace Timesheet
 		{
 			if (dataGrdClients.SelectedRows.Count != 0)
 			{
-				// Get the currently selected row.
-				int clientId = Convert.ToInt32(((DataRowView)dataGrdClients.SelectedRows[0].DataBoundItem).Row["ClientId"].ToString());
+				string messageText;
+				DialogResult result;
 
 				List<MySqlParameter> dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_ClientId", clientId));
 
-				// Remove the selected row.
+				// Get the currently selected Client's ID.
+				int clientId = Convert.ToInt32(((DataRowView)dataGrdClients.SelectedRows[0].DataBoundItem).Row["ClientId"].ToString());
+
+				// Get any referenced rows.
+				DataTable dtClientTimesheets = GetClientTimesheets(clientId);
+				DataTable dtClientTasks = GetClientTasks(clientId);
+
+				// Client has Task and Timesheet references.
+				if (dtClientTimesheets.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this client will delete {0} tasks and {1} timesheet records. "
+						+ "Are you sure you want to continue?", dtClientTasks.Rows.Count, dtClientTimesheets.Rows.Count);
+
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Task and Timesheet references.
+					if (result == DialogResult.OK)
+					{
+						DeleteTimesheets(dtClientTimesheets);
+						DeleteTasks(dtClientTasks);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+				// Client has Task references
+				else if (dtClientTasks.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this client will delete {0} tasks. "
+						+ "Are you sure you want to continue?", dtClientTasks.Rows.Count);
+          
+					result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Task references.
+					if (result == DialogResult.OK)
+					{
+						DeleteTasks(dtClientTasks);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+
+				// Delete the selected entry.
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_ClientId", clientId));
 				dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
 
 				// Refresh the data grid.
@@ -185,13 +304,40 @@ namespace Timesheet
 		{
 			if (dataGrdTasks.SelectedRows.Count != 0)
 			{
-				// Get the currently selected row.
-				int taskId = Convert.ToInt32(((DataRowView)dataGrdTasks.SelectedRows[0].DataBoundItem).Row["TaskId"].ToString());
+				string messageText;
+				DialogResult result;	
 
 				List<MySqlParameter> dbParams = new List<MySqlParameter>();
-				dbParams.Add(new MySqlParameter("p_TaskId", taskId));
 
-				// Remove the selected row.
+				// Get the currently selected Task's ID.
+				int taskId = Convert.ToInt32(((DataRowView)dataGrdTasks.SelectedRows[0].DataBoundItem).Row["TaskId"].ToString());
+
+				// Get any referenced rows.
+				DataTable dtTimesheet = GetTaskTimesheets(taskId);
+
+				// Task has Timesheet entries.
+				if (dtTimesheet.Rows.Count > 0)
+				{
+					messageText = String.Format("Deleting this task will delete {0} timesheet entries. "
+						+ "Are you sure you want to continue?", dtTimesheet.Rows.Count);
+
+          result = MessageBox.Show(messageText, "Confirm Deletion", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+					// User wants to continue, go ahead and delete Timesheet references.
+					if (result == DialogResult.OK)
+					{
+						DeleteTimesheets(dtTimesheet);
+					}
+					// User does not want to continue, cancel the operation.
+					else
+					{
+						return;
+					}
+				}
+
+				// Delete the selected Task.
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_TaskId", taskId));
 				dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
 
 				// Refresh the data grid.
@@ -208,6 +354,192 @@ namespace Timesheet
 		{
 			dtTasks = dbFunctions.FillStoredProc("Load_Tasks", new List<MySqlParameter>());
 			dataGrdTasks.DataSource = dtTasks;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all timesheet entries that reference the given task.
+		/// </summary>
+		/// <param name="taskId">The task ID to check for.</param>
+		private DataTable GetTaskTimesheets(int taskId)
+		{
+			DataTable dtTimesheet = new DataTable("Timesheet");
+
+			string dbSql = "SELECT * FROM Timesheet WHERE Task_TaskId = @taskId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@taskId", taskId));
+
+			dtTimesheet = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtTimesheet;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all timesheet entries that reference the given client.
+		/// </summary>
+		/// <param name="clientId">The client ID to check for.</param>
+		private DataTable GetClientTimesheets(int clientId)
+		{
+			DataTable dtTimesheet = new DataTable("Timesheet");
+
+			string dbSql = "SELECT * FROM Timesheet WHERE Client_ClientId = @clientId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@clientId", clientId));
+
+			dtTimesheet = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtTimesheet;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all task entries that reference the given client.
+		/// </summary>
+		/// <param name="clientId">The client ID to check for.</param>
+		private DataTable GetClientTasks(int clientId)
+		{
+			DataTable dtTasks = new DataTable("Tasks");
+
+			string dbSql = "SELECT * FROM Task WHERE Client_ClientId = @clientId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@clientId", clientId));
+
+			dtTasks = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtTasks;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all timesheet entries that reference the given project.
+		/// </summary>
+		/// <param name="projectId">The project ID to check for.</param>
+		private DataTable GetProjectTimesheets(int projectId)
+		{
+			DataTable dtTimesheet = new DataTable("Timesheet");
+
+			string dbSql = "SELECT * FROM Timesheet WHERE Project_ProjectId = @projectId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@projectId", projectId));
+
+			dtTimesheet = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtTimesheet;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all client entries that reference the given project.
+		/// </summary>
+		/// <param name="projectId">The project ID to check for.</param>
+		private DataTable GetProjectClients(int projectId)
+		{
+			DataTable dtClients = new DataTable("Clients");
+
+			string dbSql = "SELECT * FROM Client WHERE Project_ProjectId = @projectId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@projectId", projectId));
+
+			dtClients = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtClients;
+		}
+
+		/// <summary>
+		/// Returns a datatable containing all task entries that reference the given project.
+		/// </summary>
+		/// <param name="projectId">The project ID to check for.</param>
+		private DataTable GetProjectTasks(int projectId)
+		{
+			DataTable dtTasks = new DataTable("Tasks");
+
+			string dbSql = "SELECT * FROM Task WHERE Client_Project_ProjectId = @projectId";
+
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+			dbParams.Add(new MySqlParameter("@projectId", projectId));
+
+			dtTasks = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			return dtTasks;
+		}
+
+		/// <summary>
+		/// Deletes a batch of timesheet entries.
+		/// </summary>
+		/// <param name="timesheetEntries">A datatable containing the timesheet entries to delete.</param>
+		private void DeleteTimesheets(DataTable timesheetEntries)
+		{
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+
+			foreach (DataRow dr in timesheetEntries.Rows)
+			{
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_TimesheetId", Convert.ToInt32(dr["TimesheetId"].ToString())));
+
+				dbFunctions.ExecuteStoredProc("Delete_Timesheet", dbParams);
+			}
+		}
+
+		/// <summary>
+		/// Deletes a batch of task entries.
+		/// </summary>
+		/// <param name="taskEntries">A datatable containing the task entries to delete.</param>
+		private void DeleteTasks(DataTable taskEntries)
+		{
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+
+			foreach (DataRow dr in taskEntries.Rows)
+			{
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_TaskId", Convert.ToInt32(dr["TaskId"].ToString())));
+
+				dbFunctions.ExecuteStoredProc("Delete_Task", dbParams);
+			}
+		}
+
+		/// <summary>
+		/// Deletes a batch of clients.
+		/// </summary>
+		/// <param name="clientEntries">A datatable containing the clients to delete.</param>
+		private void DeleteClients(DataTable clientEntries)
+		{
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+
+			foreach (DataRow dr in clientEntries.Rows)
+			{
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_ClientId", Convert.ToInt32(dr["ClientId"].ToString())));
+
+				dbFunctions.ExecuteStoredProc("Delete_Client", dbParams);
+			}
+		}
+
+		/// <summary>
+		/// Deletes all of the employees currently assigned to a particular project.
+		/// </summary>
+		/// <param name="projectId">The ID of the project to remove all employees from.</param>
+		private void DeleteProjectEmployees(int projectId)
+		{
+			List<MySqlParameter> dbParams = new List<MySqlParameter>();
+
+			// Get all of the Employee_Has_Project entries for the given Project ID.
+			DataTable dtProjectEmployees = new DataTable("Employee_Has_Projects");
+
+			string dbSql = "SELECT * FROM Employee_Has_Project WHERE Project_ProjectId = @projectId";
+
+			dbParams.Add(new MySqlParameter("@projectId", projectId));
+
+			dtProjectEmployees = dbFunctions.FillInlineSql(dbSql, dbParams);
+
+			foreach (DataRow dr in dtProjectEmployees.Rows)
+			{
+				dbParams = new List<MySqlParameter>();
+				dbParams.Add(new MySqlParameter("p_EmpId", Convert.ToInt32(dr["Employee_EmpId"].ToString())));
+				dbParams.Add(new MySqlParameter("p_ProjectId", projectId));
+
+				dbFunctions.ExecuteStoredProc("Delete_Project_Employee", dbParams);
+			}
 		}
 	}
 }

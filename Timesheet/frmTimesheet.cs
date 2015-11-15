@@ -83,6 +83,7 @@ namespace Timesheet
 		private void btnProjects_Click(object sender, EventArgs e)
 		{
 			frmProjects newForm = new frmProjects();
+			newForm.FormClosed += NewForm_FormClosed;
 			newForm.Show();
 		}
 
