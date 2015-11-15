@@ -116,5 +116,15 @@ namespace Timesheet
 		{
 			return Regex.Replace(withNonLetters, "[^A-Za-z]", "");
     }
+
+		/// <summary>
+		/// Removes all non-digit characters from a string.
+		/// </summary>
+		/// <param name="withNonDigits">The string to process.</param>
+		/// <returns>A string with all non-digit characters removed.</returns>
+		public string RemoveNonDigits(string withNonDigits)
+		{
+			return Regex.Replace(withNonDigits, @"[^\d]", "");
+		}
 	}
 }

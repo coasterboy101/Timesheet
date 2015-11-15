@@ -27,8 +27,16 @@ namespace Timesheet
 
 		private void btnSubmit_Click(object sender, EventArgs e)
 		{
+			string cleanEmpId = dbFunctions.RemoveNonDigits(txtUserId.Text);
+
+			// If the string is empty, set it to a valid value that does not exist in the database.
+			if (String.IsNullOrEmpty(cleanEmpId))
+			{
+				cleanEmpId = "0";
+			}
+
 			List<MySqlParameter> cmdParams = new List<MySqlParameter>();
-			cmdParams.Add(new MySqlParameter("p_EmpId", Convert.ToInt32(txtUserId.Text)));
+			cmdParams.Add(new MySqlParameter("p_EmpId", Convert.ToInt32(cleanEmpId)));
 			cmdParams.Add(new MySqlParameter("p_Password", txtPassword.Text));
 
 			dtUsers = dbFunctions.FillStoredProc("Auth_User", cmdParams);
@@ -55,5 +63,7 @@ namespace Timesheet
 						MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 		}
+
+
 	}
 }

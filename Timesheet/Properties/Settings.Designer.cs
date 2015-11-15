@@ -26,7 +26,7 @@ namespace Timesheet.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;port=2000;user id=root;password=root;persistsecurityinfo=True;da" +
+        [global::System.Configuration.DefaultSettingValueAttribute("server=localhost;port=3306;user id=root;password=root;persistsecurityinfo=True;da" +
             "tabase=timesheet")]
         public string timesheetConnectionString {
             get {
