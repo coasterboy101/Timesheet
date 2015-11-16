@@ -60,6 +60,7 @@ namespace Timesheet
 			dtTimesheet = dbFunctions.FillStoredProc("Load_Timesheet", dbParams);
 
 			dataGrdTimesheet.DataSource = dtTimesheet;
+			dataGrdTimesheet.Sort(dataGrdTimesheet.Columns["gcDate"], ListSortDirection.Descending);
 		}
 
 		private void btnNewEntry_Click(object sender, EventArgs e)
@@ -95,6 +96,7 @@ namespace Timesheet
 			dtTimesheet = dbFunctions.FillStoredProc("Load_Timesheet", dbParams);
 
 			dataGrdTimesheet.DataSource = dtTimesheet;
+			dataGrdTimesheet.Sort(dataGrdTimesheet.Columns["gcDate"], ListSortDirection.Descending);
 		}
 
 		private void frmTimesheet_FormClosed(object sender, FormClosedEventArgs e)
